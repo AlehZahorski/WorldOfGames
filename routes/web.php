@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'Home\MainPage')
+Route::get('/', 'Home\MainPageController')
     ->name('home.mainPage');
 
 Route::get('users', 'UserController@list')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
 {
@@ -13,14 +14,14 @@ class GameController extends Controller
     // U - update
     // D - delete
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+
     public function index()
     {
-        dump('index');
+        $games = DB::table('games')->get();
+
+        return view('game.list', [
+            'games' => $games
+        ]);
     }
 
     /**
@@ -31,24 +32,15 @@ class GameController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function show($gameId)
     {
-        //
+        $game = DB::table('games')->where('id', $gameId)->first();
+        return view('game.show', [
+            'game' => $game
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $game
-     * @return \Illuminate\Http\Response
-     */
-    public function show($game)
+    public function store(Request $request)
     {
         //
     }

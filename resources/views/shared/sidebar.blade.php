@@ -7,6 +7,10 @@
     <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
     Użytkownicy
 </a>
+<a class="nav-link" href="{{ route('games.index') }}">
+    <div class="sb-nav-link-icon"><i class="fas fa-gamepad"></i></div>
+    Gry
+</a>
 <a class="nav-link" href="#">
     <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
     Dodaj
