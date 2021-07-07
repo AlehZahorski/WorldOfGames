@@ -16,7 +16,28 @@ class GameController extends Controller
                 'games.id', 'games.title', 'games.score',
                 'genres.id as genre_id', 'genres.name as genre_name'
             )
+            ->orderBy('title')
             ->get();
+        $bestGames = DB::table('games')
+            ->join('genres', 'games.genre_id', '=', 'genres.id')
+            ->select(
+                'games.id', 'games.title', 'games.score',
+                'genres.id as genre_id', 'genres.name as genre_name'
+            )
+            ->where('score', '=', '10')
+            ->orderBy('score','desc')
+            ->get();
+
+        /*
+        $query = DB::table('games')->where([
+                        ['id',1],
+                        ['name',$name])
+                 ->get();
+        $query = DB::table('games')
+            ->whereBetween('id',[1,4])->get();
+        dd($query);
+        */
+
         $statistic = [
               'count' => $games->count(),
               'countScoreGtSeven' => $games->where('score', '>', 7)->count(),
@@ -27,13 +48,16 @@ class GameController extends Controller
 
         return view('game.list', [
             'games' => $games,
-            'statistics' => $statistic
+            'statistics' => $statistic,
+            'bestGames' => $bestGames
         ]);
     }
 
     public function show($gameId)
     {
-        $game = DB::table('games')->where('id', $gameId)->first();
+        $game = DB::table('games')
+            ->where('id', $gameId)
+            ->first();
         return view('game.show', [
             'game' => $game
         ]);

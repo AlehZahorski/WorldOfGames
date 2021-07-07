@@ -23,7 +23,7 @@ class GamesSeeder extends Seeder
                         'genre_id' => $faker->numberBetween(1, 5),
                         'description' => $faker->text(200),
                         'publisher' => $faker->randomElement(['Atari', 'EA', 'Blizzard', 'Ubisoft', 'Sony']),
-                        'score' => $faker->numberBetween(1, 100)
+                        'score' => $faker->numberBetween(1, 10)
                 ];
             }
             DB::table('games')->insert($games);
